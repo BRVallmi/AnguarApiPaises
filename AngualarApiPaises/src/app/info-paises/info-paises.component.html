@@ -14,7 +14,7 @@
       <p><strong>Subregión:</strong> {{ paisInfo.subregion }}</p>
       <p><strong>Idioma:</strong> {{ paisInfo.languages | json }}</p>
       <p><strong>Bandera:</strong></p>
-      <img [src]="paisInfo.flags.svg" alt="Bandera de {{ paisInfo.name.common }}" style="width: 150px;">
+      <img [src]="paisInfo.flags.svg" id="flag" alt="Bandera de {{ paisInfo.name.common }}">
     </div>
   
     <div *ngIf="errorMessage">
