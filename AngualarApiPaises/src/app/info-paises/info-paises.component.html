@@ -5,23 +5,63 @@
 </header>
 <main>
   <div class="container">
-    <h1>Buscar Información de un País</h1>
-    <form id="countryForm" (submit)="buscarPais($event)">
-      <input type="text" id="countryInput" placeholder="Escribe el nombre del país..." required>
-      <button type="submit">Buscar</button>
-    </form>
-
-    <div id="countryInfo" class="info" *ngIf="paisInfo">
-      <h2>Información del País</h2>
-      <p><strong>Nombre:</strong> {{ paisInfo.name.common }}</p>
-      <p><strong>Capital:</strong> {{ paisInfo.capital[0] }}</p>
-      <p><strong>Población:</strong> {{ paisInfo.population | number }}</p>
-      <p><strong>Región:</strong> {{ paisInfo.region }}</p>
-      <p><strong>Subregión:</strong> {{ paisInfo.subregion }}</p>
-      <p><strong>Idioma:</strong> {{ paisInfo.languages | json }}</p>
-      <p><strong>Bandera:</strong></p>
-      <img [src]="paisInfo.flags.svg" id="flag" alt="Bandera de {{ paisInfo.name.common }}">
+    <div class="search" *ngIf="showForm">
+      <h3>Introdueix un pais</h3>
+      <form id="countryForm" (submit)="buscarPais($event)">
+        <input type="text" id="countryInput" [placeholder]="placeholderPais" required>      <button type="submit">Buscar</button>
+      </form>
     </div>
+    
+    <div id="countryInfo" class="info" *ngIf="paisInfo">
+      <h2>Informació</h2>
+      <table class="country-table">
+        <thead>
+          <tr>
+            <th>Detalle</th>
+            <th>Información</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Nombre:</strong></td>
+            <td>{{ paisInfo.name.common }}</td>
+          </tr>
+          <tr>
+            <td><strong>Capital:</strong></td>
+            <td>{{ paisInfo.capital[0] }}</td>
+          </tr>
+          <tr>
+            <td><strong>Población:</strong></td>
+            <td>{{ paisInfo.population | number }}</td>
+          </tr>
+          <tr>
+            <td><strong>Región:</strong></td>
+            <td>{{ paisInfo.region }}</td>
+          </tr>
+          <tr>
+            <td><strong>Subregión:</strong></td>
+            <td>{{ paisInfo.subregion }}</td>
+          </tr>
+          <tr>
+            <td><strong>Idioma(s):</strong></td>
+            <td>
+              <ul>
+                <li *ngFor="let idioma of paisInfo.languages | keyvalue">
+                  {{ idioma.value }}
+                </li>
+              </ul>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Bandera:</strong></td>
+            <td>
+              <img [src]="paisInfo.flags.svg" id="flag" alt="Bandera de {{ paisInfo.name.common }}" class="flag-img">
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
 
     <div *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>

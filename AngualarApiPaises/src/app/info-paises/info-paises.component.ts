@@ -9,8 +9,20 @@ import { PaisesApiService } from '../paises-api.service';
 export class InfoPaisesComponent {
   paisInfo: any = null;
   errorMessage: string = '';
-
+  
   constructor(private paisesApiService: PaisesApiService) {}
+  paises: string[] = ['Spain', 'France', 'Germany', 'Italy', 'Argentina', 'Mexico', 'Japan', 'Australia', 'Brazil', 'Canada'];
+  placeholderPais: string = '';
+  showForm: boolean = true;
+
+  ngOnInit(): void {
+    this.placeholderPais = this.obtenerPaisAleatorio();
+  }
+
+  obtenerPaisAleatorio(): string {
+    const indiceAleatorio = Math.floor(Math.random() * this.paises.length);
+    return this.paises[indiceAleatorio];
+  }
 
   buscarPais(event: Event): void {
     event.preventDefault();
@@ -19,11 +31,12 @@ export class InfoPaisesComponent {
     const nombrePais = inputElement.value.trim();
 
     if (nombrePais) {
+      this.showForm = false; // Oculta el formulario
       this.paisesApiService.getPaisInfo(nombrePais).subscribe({
         next: (data) => {
           if (data && data.length > 0) {
-            this.paisInfo = data[0]; // Tomamos el primer país de la lista
-            this.errorMessage = ''; // Limpiar mensaje de error
+            this.paisInfo = data[0];
+            this.errorMessage = ''; 
           } else {
             this.errorMessage = 'No se encontró información para ese país.';
             this.paisInfo = null;
@@ -31,7 +44,7 @@ export class InfoPaisesComponent {
         },
         error: (error) => {
           this.errorMessage = 'Error al buscar la información del país';
-          this.paisInfo = null; // Limpiar datos anteriores
+          this.paisInfo = null;
         }
       });
     }
