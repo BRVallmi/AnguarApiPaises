@@ -1,10 +1,16 @@
-<div class="container">
+<header>
+  <div class="encabezado">
+    <h1>Informació Paisos</h1>
+  </div>
+</header>
+<main>
+  <div class="container">
     <h1>Buscar Información de un País</h1>
     <form id="countryForm" (submit)="buscarPais($event)">
       <input type="text" id="countryInput" placeholder="Escribe el nombre del país..." required>
       <button type="submit">Buscar</button>
     </form>
-  
+
     <div id="countryInfo" class="info" *ngIf="paisInfo">
       <h2>Información del País</h2>
       <p><strong>Nombre:</strong> {{ paisInfo.name.common }}</p>
@@ -16,9 +22,9 @@
       <p><strong>Bandera:</strong></p>
       <img [src]="paisInfo.flags.svg" id="flag" alt="Bandera de {{ paisInfo.name.common }}">
     </div>
-  
+
     <div *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>
     </div>
   </div>
-  
+</main>    
