@@ -14,6 +14,7 @@ export class InfoPaisesComponent {
   paises: string[] = ['Spain', 'France', 'Germany', 'Italy', 'Argentina', 'Mexico', 'Japan', 'Australia', 'Brazil', 'Canada'];
   placeholderPais: string = '';
   showForm: boolean = true;
+  btNewSearch: boolean = false;
 
   ngOnInit(): void {
     this.placeholderPais = this.obtenerPaisAleatorio();
@@ -24,6 +25,12 @@ export class InfoPaisesComponent {
     return this.paises[indiceAleatorio];
   }
 
+  newSearch(): void {
+    this.showForm = true;
+    this.paisInfo = false;
+    this.btNewSearch = false;
+  }
+
   buscarPais(event: Event): void {
     event.preventDefault();
 
@@ -31,7 +38,8 @@ export class InfoPaisesComponent {
     const nombrePais = inputElement.value.trim();
 
     if (nombrePais) {
-      this.showForm = false; // Oculta el formulario
+      this.showForm = false;
+      this.btNewSearch = true;
       this.paisesApiService.getPaisInfo(nombrePais).subscribe({
         next: (data) => {
           if (data && data.length > 0) {

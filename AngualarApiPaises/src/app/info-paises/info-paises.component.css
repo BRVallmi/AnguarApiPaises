@@ -23,12 +23,12 @@ main{
 }
 
 .container {
-    max-width: 600px; /* Limita el ancho máximo del contenedor */
-  margin: 0 auto;   /* Centra el contenedor en la página */
-  padding: 20px;    /* Añade algo de espacio alrededor del contenido */
-  background-color: #f9f9f9; /* Color de fondo ligero para diferenciar el área */
-  border-radius: 8px; /* Bordes redondeados para un estilo más suave */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera para darle profundidad */
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: beige;
 }
 
@@ -58,6 +58,7 @@ button {
     border-radius: 4px;
     cursor: pointer;
     color: white;
+    justify-content: center;
 }
 
 .table-container {
@@ -107,3 +108,8 @@ max-height: 400px;
 overflow-y: auto;
 }
 
+.btSearch{
+    margin-top: 2.5vh;
+    display: flex;
+    justify-content: center;
+}

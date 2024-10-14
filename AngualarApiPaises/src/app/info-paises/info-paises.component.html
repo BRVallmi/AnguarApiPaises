@@ -66,5 +66,8 @@
     <div *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>
     </div>
+    <div class="btSearch" *ngIf="btNewSearch">
+      <button (click)="newSearch()" >Tornar a cercar</button>
+    </div>
   </div>
 </main>    
